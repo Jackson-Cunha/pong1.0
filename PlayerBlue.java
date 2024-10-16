@@ -1,5 +1,8 @@
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class PlayerBlue {
   public static final int WIDTH = 15;
@@ -8,8 +11,15 @@ public class PlayerBlue {
   public static int y = 130;
   public boolean up = false;
   public boolean down = false;
+  public BufferedImage image;
 
-  public PlayerBlue() {}
+  public PlayerBlue() {
+    try {
+      image = ImageIO.read(getClass().getResourceAsStream("/res/blue.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   public void update() {
         
@@ -27,9 +37,8 @@ public class PlayerBlue {
 
   }
 
-  public void render(Graphics g) {
-    g.setColor(Color.BLUE);
-    g.fillRect(x, y, WIDTH, HEIGHT);
+  public void draw(Graphics2D g2) {
+    g2.drawImage(image, x, y, WIDTH, HEIGHT, null);
   }
 
 }

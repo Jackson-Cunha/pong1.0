@@ -3,6 +3,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -21,7 +22,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
   public Game() {
     this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    this.addKeyListener(this);    
+    this.addKeyListener(this);
+    this.setFocusable(true);    
   }
   
   public void update() {
@@ -40,11 +42,12 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     Graphics g = layer.getGraphics();
+    Graphics2D g2 = (Graphics2D) g;
     g.setColor(Color.BLACK);
     g.fillRect(0,0, WIDTH, HEIGHT);
     g.clearRect(0, 0, WIDTH, HEIGHT);    
-    player.renderR(g);
-    playerBlue.render(g);
+    player.draw(g2);
+    playerBlue.draw(g2);
     ball.render(g);
     
     g = bs.getDrawGraphics();
