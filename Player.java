@@ -1,15 +1,26 @@
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Player {
+
   public static final int WIDTH = 15;
   public static final int HEIGHT = 100;
   public static int x = 10;
   public static int y = 130;//(Game.HEIGHT/2) - HEIGHT/2;
   public boolean up = false;
   public boolean down = false;
+  public BufferedImage image;
 
-  public Player() {}
+  public Player() {
+    try {
+      image = ImageIO.read(getClass().getResourceAsStream("/res/red.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   public void update() {
         
@@ -27,9 +38,8 @@ public class Player {
 
   }
 
-  public void renderR(Graphics g) {
-    g.setColor(Color.RED);
-    g.fillRect(x, y, WIDTH, HEIGHT);
+  public void draw(Graphics2D g2) {   
+    g2.drawImage(image, x, y, WIDTH, HEIGHT, null);
   }
 
 }
